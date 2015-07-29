@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarroCreateDlg" widgetVar="CarroCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCarroTitle}">
+            <h:form id="CarroCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carroController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCarroLabel_numeromatricula}" for="numeromatricula" />
+                        <p:inputText id="numeromatricula" value="#{carroController.selected.numeromatricula}" title="#{bundle.CreateCarroTitle_numeromatricula}" required="true" requiredMessage="#{bundle.CreateCarroRequiredMessage_numeromatricula}"/>
+                        <p:outputLabel value="#{bundle.CreateCarroLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{carroController.selected.nombre}" title="#{bundle.CreateCarroTitle_nombre}" required="true" requiredMessage="#{bundle.CreateCarroRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateCarroLabel_marca}" for="marca" />
+                        <p:inputText id="marca" value="#{carroController.selected.marca}" title="#{bundle.CreateCarroTitle_marca}" required="true" requiredMessage="#{bundle.CreateCarroRequiredMessage_marca}"/>
+                        <p:outputLabel value="#{bundle.CreateCarroLabel_descripcion}" for="descripcion" />
+                        <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{carroController.selected.descripcion}" title="#{bundle.CreateCarroTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateCarroRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.CreateCarroLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{carroController.selected.precio}" title="#{bundle.CreateCarroTitle_precio}" required="true" requiredMessage="#{bundle.CreateCarroRequiredMessage_precio}"/>
+                        <p:outputLabel value="Imagen" for="img" />
+                      
+                        <p:inputText id="img" value="#{carroController.selected.img}" title="#{bundle.CreateCarroTitle_img}" required="true" requiredMessage="#{bundle.CreateCarroRequiredMessage_img}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{carroController.create}" value="#{bundle.Save}" update="display,:CarroListForm:datalist,:growl" oncomplete="handleSubmit(args,'CarroCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CarroCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
